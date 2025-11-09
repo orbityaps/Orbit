@@ -11,9 +11,9 @@ import { useRouter } from "next/navigation";
 
 // Optional: Table of Contents component (remove if not needed)
 const TableOfContents = () => (
-  <div className="p-6 bg-background/50 border border-border rounded-lg sticky top-24">
-    <h2 className="text-lg font-light mb-4 text-foreground">Table of Contents</h2>
-    <ul className="space-y-2 text-foreground/70 font-light text-sm">
+  <div className="hidden lg:block p-4 lg:p-6 bg-background/50 border border-border rounded-lg sticky top-24">
+    <h2 className="text-base lg:text-lg font-light mb-4 text-foreground">Table of Contents</h2>
+    <ul className="space-y-2 text-foreground/70 font-light text-xs lg:text-sm">
       <li><a href="#whats-apc" className="hover:text-foreground transition-colors">1. What's the Deal with APCs?</a></li>
       <li><a href="#early-bird" className="hover:text-foreground transition-colors">2. The Early Bird Gets the Shellcode</a></li>
       <li><a href="#nttestalert" className="hover:text-foreground transition-colors">3. NtTestAlert: Undocumented Chaos</a></li>
@@ -36,7 +36,7 @@ const Section = ({ id, title, children, icon: Icon }: { id: string, title: strin
       <Icon className="h-5 w-5 mr-3 text-foreground/60" />
       <h2 className="text-2xl md:text-3xl font-light tracking-tight text-foreground">{title}</h2>
     </div>
-    <div className="text-foreground/80 font-light leading-relaxed">
+    <div className="text-foreground/80 font-light leading-relaxed break-words">
       {children}
     </div>
   </motion.section>
@@ -44,12 +44,12 @@ const Section = ({ id, title, children, icon: Icon }: { id: string, title: strin
 
 // CodeBlock component for code snippets
 const CodeBlock = ({ code, language }: { code: string, language: string }) => (
-  <div className="bg-black/80 border border-border rounded-lg p-4 my-6 overflow-x-auto">
+  <div className="bg-black/80 border border-border rounded-lg p-3 sm:p-4 my-6 overflow-x-auto">
     <div className="flex justify-between items-center mb-2">
-      <span className="text-foreground/60 text-sm font-mono">{language}</span>
+      <span className="text-foreground/60 text-xs sm:text-sm font-mono">{language}</span>
     </div>
-    <pre className="text-foreground/90 font-mono text-sm leading-relaxed whitespace-pre-wrap">
-      {code}
+    <pre className="text-foreground/90 font-mono text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">
+      <code className="break-words">{code}</code>
     </pre>
   </div>
 );
@@ -87,7 +87,7 @@ export default function BlogPost() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl font-extralight tracking-tight mb-6 text-foreground"
+              className="text-3xl sm:text-4xl md:text-5xl font-extralight tracking-tight mb-6 text-foreground break-words"
             >
               APC Injection: Because Why Let Threads Sleep Peacefully?
             </motion.h1>
@@ -129,41 +129,44 @@ export default function BlogPost() {
           </div>
 
           {/* Content Grid */}
-          <div className="grid lg:grid-cols-4 gap-12">
-            <div className="lg:col-span-3">
+          <div className="grid lg:grid-cols-4 gap-6 lg:gap-12">
+            <div className="lg:col-span-3 w-full">
               {/* What's APC */}
               <Section id="whats-apc" title="So, What's the Deal with APCs?" icon={Terminal}>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   Every Windows thread gets its own little to-do list, called an APC queue. Normally, this is where the OS politely drops tasks for the thread to handle when it's in an alertable state. Think of it like Outlook reminders, but instead of "drink water" it's "execute arbitrary code."
                 </p>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   Now, Microsoft gave us QueueUserAPC, a nice little API that lets you add items to that queue. Sounds harmless, right? Until someone realizes they can drop malicious shellcode in there instead of the usual "update printer driver" chore.
                 </p>
-                <p className="font-medium text-foreground">
+                <p className="font-medium text-foreground break-words">
                   In other words: APC injection is just weaponized multitasking.
                 </p>
               </Section>
 
               {/* Early Bird */}
               <Section id="early-bird" title="The Early Bird Gets the Shellcode " icon={Bug}>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   Let's start with the "early bird" technique. It's called that because the attacker beats Windows to the punch by hijacking a thread before it ever runs properly.
                 </p>
 
-                <p>Text above the image — intro sentence.</p>
+                <p className="break-words">Text above the image — intro sentence.</p>
 
-<Image
-  src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*t46PWqkyOUZJ6CPLz41uyw.png"   // or an external URL
-  alt="Descriptive alt text"
-  width={1200}
-  height={600}
-  className="mx-auto my-6 rounded-lg object-cover"
-/>
+<div className="relative w-full my-6 rounded-lg overflow-hidden border border-border">
+  <Image
+    src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*t46PWqkyOUZJ6CPLz41uyw.png"
+    alt="Descriptive alt text"
+    width={1200}
+    height={600}
+    className="w-full h-auto rounded-lg object-contain"
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+  />
+</div>
 
 
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Step 1: Create a Suspended Process</h3>
-                <p className="mb-4">
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Step 1: Create a Suspended Process</h3>
+                <p className="mb-4 break-words">
                   You spin up something innocent, like notepad.exe, but with the CREATE_SUSPENDED flag. Translation: "Hey Notepad, welcome to the party, but stay in the corner and don't touch anything yet."
                 </p>
 
@@ -176,8 +179,8 @@ export default function BlogPost() {
                   language="c"
                 />
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Step 2: Allocate Memory</h3>
-                <p className="mb-4">
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Step 2: Allocate Memory</h3>
+                <p className="mb-4 break-words">
                   Use VirtualAllocEx to carve out space in Notepad's memory and mark it executable. Defenders should already be sweating — anytime one process allocates memory inside another, something sketchy is about to happen.
                 </p>
 
@@ -186,8 +189,8 @@ export default function BlogPost() {
                   language="c"
                 />
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Step 3: Write Payload</h3>
-                <p className="mb-4">
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Step 3: Write Payload</h3>
+                <p className="mb-4 break-words">
                   Drop your shellcode in there. Nothing fancy, just your favorite message box or whatever you've cooked up.
                 </p>
 
@@ -196,8 +199,8 @@ export default function BlogPost() {
                   language="c"
                 />
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Step 4: Queue the APC</h3>
-                <p className="mb-4">
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Step 4: Queue the APC</h3>
+                <p className="mb-4 break-words">
                   Tell Notepad's suspended thread, "when you finally wake up, first thing you're gonna do is run this payload."
                 </p>
 
@@ -207,8 +210,8 @@ QueueUserAPC((PAPCFUNC)apcRoutine , threadHandle , (ULONG_PTR)NULL);`}
                   language="c"
                 />
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Step 5: Resume the Thread</h3>
-                <p className="mb-4">
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Step 5: Resume the Thread</h3>
+                <p className="mb-4 break-words">
                   Finally, hit play. Instead of writing notes, Notepad will gleefully execute your injected code. Congratulations, you've just hijacked a process without even breaking a sweat.
                 </p>
 
@@ -217,7 +220,7 @@ QueueUserAPC((PAPCFUNC)apcRoutine , threadHandle , (ULONG_PTR)NULL);`}
                   language="c"
                 />
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Operational Example</h3>
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Operational Example</h3>
                 <CodeBlock 
                   code={`#include <stdio.h>
 #include <stdlib.h>
@@ -261,31 +264,34 @@ int main(){
               </Section>
               <p>Text above the image — intro sentence.</p>
 
-<Image
-  src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*zZwZlHpUGtc797Bn8sJBCQ.png"   // or an external URL
-  alt="Descriptive alt text"
-  width={1200}
-  height={600}
-  className="mx-auto my-6 rounded-lg object-cover"
-/>
+<div className="relative w-full my-6 rounded-lg overflow-hidden border border-border">
+  <Image
+    src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*zZwZlHpUGtc797Bn8sJBCQ.png"
+    alt="Descriptive alt text"
+    width={1200}
+    height={600}
+    className="w-full h-auto rounded-lg object-contain"
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+  />
+</div>
 
 
               {/* NtTestAlert */}
               <Section id="nttestalert" title="NtTestAlert: Because Who Needs Documentation Anyway?" icon={Shield}>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   If you thought QueueUserAPC was a bit sneaky, NtTestAlert takes it to the next level.
                 </p>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   This little gem is an undocumented syscall — basically Microsoft's way of saying, "Don't touch this... unless you enjoy chaos." Its sole purpose? Force a thread to immediately process any pending APCs.
                 </p>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   No more waiting around for the thread to politely check its queue. You just poke it and say, "Hey, time to run your chores!" And what's waiting for it? Yep... your payload, front and center.
                 </p>
-                <p className="font-medium text-foreground mb-4">
+                <p className="font-medium text-foreground mb-4 break-words">
                   It's basically the VIP pass of thread execution. Everyone else queues like good citizens, but you? You're already strapped in and screaming on the rollercoaster.
                 </p>
 
-                <h3 className="text-xl font-light mt-6 mb-3 text-foreground">Operational Example</h3>
+                <h3 className="text-lg sm:text-xl font-light mt-6 mb-3 text-foreground break-words">Operational Example</h3>
                 <CodeBlock 
                   code={`#include <stdio.h>
 #include <stdlib.h>
@@ -317,17 +323,17 @@ int main(int argc, char* argv[]) {
 
               {/* Wrap Up */}
               <Section id="wrap-up" title="Wrap-Up" icon={Code}>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   APC injection is one of those techniques that's both elegant and infuriating. Elegant because it abuses Windows internals in a way that almost feels "by design." Infuriating because once again, attackers get to use normal OS features as weapons, leaving defenders to piece together a mess of alerts that may or may not scream "injection."
                 </p>
-                <p className="mb-4">
+                <p className="mb-4 break-words">
                   So, whether you're a hacker nerd learning the ropes, a red teamer flexing on defenders, or a blue teamer losing sleep over suspicious VirtualAllocEx calls — congratulations, you now understand why APC injection is one of the cooler (and scarier) code injection methods out there.
                 </p>
               </Section>
             </div>
             
             {/* Optional: Sidebar with Table of Contents */}
-            <aside className="lg:col-span-1">
+            <aside className="lg:col-span-1 hidden lg:block">
               <TableOfContents />
             </aside>
           </div>
