@@ -15,7 +15,7 @@ export function isPostComingSoon(slug: string): boolean {
  * @param slug - The slug of the blog post
  * @returns The blog post object or undefined if not found
  */
-export function getPostBySlug(slug: string) {
+export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find(p => p.slug === slug);
 }
 

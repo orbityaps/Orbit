@@ -9,7 +9,7 @@ import { blogPosts as allBlogPosts, type BlogPost } from "@/lib/blogData";
 // Sort all posts by date (newest first)
 // Coming soon posts are shown but not clickable
 const blogPosts = allBlogPosts
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  .sort((a: BlogPost, b: BlogPost) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const MotionLink = motion(Link);
 

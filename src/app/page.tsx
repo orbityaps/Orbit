@@ -10,7 +10,7 @@ const MotionLink = motion(Link);
 // Filter out coming soon posts and get latest 2
 const latestPosts = allBlogPosts
   .filter((post: BlogPost) => !post.isComingSoon)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .sort((a: BlogPost, b: BlogPost) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 2);
 
 export default function Home() {
