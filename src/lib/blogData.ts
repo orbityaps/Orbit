@@ -42,7 +42,16 @@ export const blogPosts: BlogPost[] = [
     description: "Learn about APC Injection, a cool (and scary) code injection method",
     tags: ["APC Injection", "Windows Internals", "Malware Development", "Thread Hijacking", "QueueUserAPC", "NtTestAlert"],
     isExternal: false
+  },
+  {
+    id: "custom-lsass-dumpers",
+    title: "Beyond Mimikatz: The Art of Developing Custom LSASS Dumpers",
+    date: "Sep 19, 2025",
+    readTime: "5 min read",
+    slug: "/blog/Beyond-Mimikatz",
+    description: "Learn how to build custom LSASS dumpers from scratch using Windows APIs for better evasion against modern security products.",
+    tags: ["Malware Development", "LSASS", "Windows Security", "C++", "Red Team"],
+    isExternal: false
   }
-  
   
 ];
