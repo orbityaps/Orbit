@@ -1,4 +1,4 @@
-import { blogPosts } from "./blogData";
+import { blogPosts, type BlogPost } from "./blogData";
 
 /**
  * Check if a blog post is marked as "coming soon"
@@ -7,7 +7,7 @@ import { blogPosts } from "./blogData";
  */
 export function isPostComingSoon(slug: string): boolean {
   const post = blogPosts.find(p => p.slug === slug);
-  return (post as any)?.isComingSoon === true;
+  return post?.isComingSoon === true;
 }
 
 /**

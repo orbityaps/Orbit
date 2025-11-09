@@ -4,7 +4,7 @@ import PageLayout from "@/components/PageLayout";
 import { motion } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { blogPosts as allBlogPosts } from "@/lib/blogData";
+import { blogPosts as allBlogPosts, type BlogPost } from "@/lib/blogData";
 
 // Sort all posts by date (newest first)
 // Coming soon posts are shown but not clickable
@@ -93,8 +93,8 @@ export default function BlogPage() {
             animate="show"
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
-            {blogPosts.map((post) => {
-              const isComingSoon = (post as any).isComingSoon === true;
+            {blogPosts.map((post: BlogPost) => {
+              const isComingSoon = post.isComingSoon === true;
               const content = (
                 <div className={`flex flex-col h-full bg-background/40 hover:bg-background/60 backdrop-blur-sm p-6 md:p-8 border border-border/50 transition-all duration-500 group/card ${isComingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:border-foreground/20'}`}>
                   <p className="text-sm text-muted-foreground/70 mb-5 font-light uppercase tracking-[0.15em]">

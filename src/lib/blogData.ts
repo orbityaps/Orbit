@@ -1,4 +1,16 @@
-export const blogPosts = [
+export interface BlogPost {
+  id: string;
+  title: string;
+  date: string;
+  readTime?: string;
+  slug: string;
+  description: string;
+  tags: string[];
+  isExternal: boolean;
+  isComingSoon?: boolean;
+}
+
+export const blogPosts: BlogPost[] = [
 // {
 //   id: "post-8347",
 //   title: "Sample Tutorial Post — Part 1",

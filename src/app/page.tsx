@@ -3,13 +3,13 @@
 import PageLayout from "@/components/PageLayout";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { blogPosts as allBlogPosts } from "@/lib/blogData";
+import { blogPosts as allBlogPosts, type BlogPost } from "@/lib/blogData";
 
 const MotionLink = motion(Link);
 
 // Filter out coming soon posts and get latest 2
 const latestPosts = allBlogPosts
-  .filter(post => !(post as any).isComingSoon)
+  .filter((post: BlogPost) => !post.isComingSoon)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 2);
 
