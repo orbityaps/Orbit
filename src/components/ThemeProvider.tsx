@@ -3,6 +3,7 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ReactNode } from "react";
 
+// Custom ThemeProviderProps interface to avoid importing from next-themes/dist/types
 interface ThemeProviderProps {
   children: ReactNode;
   attribute?: string;
