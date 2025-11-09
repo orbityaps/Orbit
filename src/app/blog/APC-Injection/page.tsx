@@ -106,12 +106,12 @@ export default function BlogPost() {
        
 
           {/* Disclaimer */}
-          <div className="bg-yellow-500/10 border border-yellow-500/20 p-6 rounded-lg my-8">
+          <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 sm:p-6 rounded-lg my-8">
             <div className="flex items-start">
               <AlertTriangle className="h-5 w-5 text-yellow-500 mr-3 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="font-light mb-2 text-foreground">Disclaimer</h3>
-                <p className="text-sm text-foreground/70 font-light leading-relaxed">
+              <div className="flex-1">
+                <h3 className="text-lg sm:text-xl font-light mb-3 text-foreground break-words">Disclaimer</h3>
+                <p className="text-foreground/80 font-light leading-relaxed break-words">
                   This isn't one of those dry academic write-ups. This is me, caffeine-fueled, writing about why Windows threads can't be trusted to mind their own business. Typos might sneak in, but hey, that's the price of authenticity.
                 </p>
               </div>
@@ -351,9 +351,9 @@ int main(int argc, char* argv[]) {
             </div>
 
             {/* Legal Disclaimer */}
-            <div className="bg-background/50 border border-border p-6 rounded-lg my-8 max-w-2xl mx-auto">
-              <h3 className="font-light mb-2 text-foreground">Legal Disclaimer</h3>
-              <p className="text-sm text-foreground/70 font-light leading-relaxed">
+            <div className="bg-background/50 border border-border p-4 sm:p-6 rounded-lg my-8 max-w-2xl mx-auto">
+              <h3 className="text-lg sm:text-xl font-light mb-3 text-foreground break-words">Legal Disclaimer</h3>
+              <p className="text-foreground/80 font-light leading-relaxed break-words">
                 This content is for educational purposes only. Techniques, code, and information here are not endorsed for malicious use.
               </p>
             </div>
