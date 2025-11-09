@@ -36,7 +36,7 @@ const Section = ({ id, title, children, icon: Icon }: { id: string, title: strin
       <Icon className="h-5 w-5 mr-3 text-foreground/60" />
       <h2 className="text-2xl md:text-3xl font-light tracking-tight text-foreground">{title}</h2>
     </div>
-    <div className="text-foreground/80 font-light leading-relaxed break-words">
+    <div className="text-foreground/80 font-light leading-relaxed break-words overflow-x-hidden max-w-full">
       {children}
     </div>
   </motion.section>
@@ -44,12 +44,12 @@ const Section = ({ id, title, children, icon: Icon }: { id: string, title: strin
 
 // CodeBlock component for code snippets
 const CodeBlock = ({ code, language }: { code: string, language: string }) => (
-  <div className="bg-black/80 border border-border rounded-lg p-3 sm:p-4 my-6 overflow-x-auto">
+  <div className="bg-black/80 border border-border rounded-lg p-3 sm:p-4 my-6 overflow-x-auto max-w-full">
     <div className="flex justify-between items-center mb-2">
       <span className="text-foreground/60 text-xs sm:text-sm font-mono">{language}</span>
     </div>
-    <pre className="text-foreground/90 font-mono text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere">
-      <code className="break-words">{code}</code>
+    <pre className="text-foreground/90 font-mono text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words overflow-wrap-anywhere word-break-break-all max-w-full">
+      <code className="break-words break-all">{code}</code>
     </pre>
   </div>
 );
@@ -71,8 +71,8 @@ export default function BlogPost() {
 
   return (
     <PageLayout>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="max-w-5xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 overflow-x-hidden w-full">
+        <div className="max-w-5xl mx-auto w-full">
           {/* Back button */}
           <Link 
             href="/blog" 
@@ -119,18 +119,19 @@ export default function BlogPost() {
           </div>
 
           {/* Optional: Featured Image */}
-          <div className="relative w-full aspect-[16/8] rounded-lg overflow-hidden my-12 border border-border">
+          <div className="relative w-full max-w-full aspect-[16/8] rounded-lg overflow-hidden my-12 border border-border">
             <Image
               src="https://images.unsplash.com/photo-1753998941540-081eed4f6397?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470"
               alt="APC Injection - Weaponized Windows Threads"
               fill
               className="object-cover"
+              sizes="100vw"
             />
           </div>
 
           {/* Content Grid */}
-          <div className="grid lg:grid-cols-4 gap-6 lg:gap-12">
-            <div className="lg:col-span-3 w-full">
+          <div className="grid lg:grid-cols-4 gap-6 lg:gap-12 w-full max-w-full">
+            <div className="lg:col-span-3 w-full max-w-full overflow-x-hidden">
               {/* What's APC */}
               <Section id="whats-apc" title="So, What's the Deal with APCs?" icon={Terminal}>
                 <p className="mb-4 break-words">
@@ -152,14 +153,14 @@ export default function BlogPost() {
 
                 <p className="break-words">Text above the image — intro sentence.</p>
 
-<div className="relative w-full my-6 rounded-lg overflow-hidden border border-border">
+<div className="relative w-full max-w-full my-6 rounded-lg overflow-hidden border border-border">
   <Image
     src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*t46PWqkyOUZJ6CPLz41uyw.png"
     alt="Descriptive alt text"
     width={1200}
     height={600}
-    className="w-full h-auto rounded-lg object-contain"
-    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+    className="w-full h-auto rounded-lg object-contain max-w-full"
+    sizes="100vw"
   />
 </div>
 
@@ -264,14 +265,14 @@ int main(){
               </Section>
               <p>Text above the image — intro sentence.</p>
 
-<div className="relative w-full my-6 rounded-lg overflow-hidden border border-border">
+<div className="relative w-full max-w-full my-6 rounded-lg overflow-hidden border border-border">
   <Image
     src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*zZwZlHpUGtc797Bn8sJBCQ.png"
     alt="Descriptive alt text"
     width={1200}
     height={600}
-    className="w-full h-auto rounded-lg object-contain"
-    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+    className="w-full h-auto rounded-lg object-contain max-w-full"
+    sizes="100vw"
   />
 </div>
 

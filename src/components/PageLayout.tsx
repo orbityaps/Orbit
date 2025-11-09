@@ -13,7 +13,7 @@ export default function PageLayout({
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden w-full">
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main
@@ -22,7 +22,7 @@ export default function PageLayout({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.3 }}
-          className="flex-grow pt-24 pb-12"
+          className="flex-grow pt-24 pb-12 overflow-x-hidden w-full max-w-full"
         >
           {children}
         </motion.main>
